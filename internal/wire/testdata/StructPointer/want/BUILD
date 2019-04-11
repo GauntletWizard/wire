@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["wire_gen.go"],
-    importpath = "github.com/maxbrunsfeld/counterfeiter/internal/wire/testdata/StructPointer/want",
+    importpath = "github.com/google/wire/internal/wire/testdata/StructPointer/want",
     visibility = ["//visibility:private"],
 )
 

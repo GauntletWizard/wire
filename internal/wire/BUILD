@@ -9,7 +9,7 @@ go_library(
         "parse.go",
         "wire.go",
     ],
-    importpath = "github.com/maxbrunsfeld/counterfeiter/internal/wire",
+    importpath = "github.com/google/wire/internal/wire",
     visibility = ["//:__subpackages__"],
     deps = [
         "@org_golang_x_tools//go/ast/astutil:go_default_library",

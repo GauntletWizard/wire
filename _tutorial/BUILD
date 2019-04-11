@@ -6,7 +6,7 @@ go_library(
         "main.go",
         "wire_gen.go",
     ],
-    importpath = "github.com/maxbrunsfeld/counterfeiter/_tutorial",
+    importpath = "github.com/google/wire/_tutorial",
     visibility = ["//visibility:private"],
 )
 

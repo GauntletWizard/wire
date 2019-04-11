@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["bar.go"],
-    importpath = "github.com/maxbrunsfeld/counterfeiter/internal/wire/testdata/BuildTagsAllPackages/bar",
+    importpath = "github.com/google/wire/internal/wire/testdata/BuildTagsAllPackages/bar",
     visibility = ["//:__subpackages__"],
-    deps = ["@com_github_google_wire//:go_default_library"],
+    deps = ["//:go_default_library"],
 )
