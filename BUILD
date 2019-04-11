@@ -15,5 +15,5 @@ go_library(
     name = "go_default_library",
     srcs = ["wire.go"],
     importpath = "github.com/google/wire",
-    visibility = ["//visibility:private"],
+    visibility = ["//visibility:public"],
 )

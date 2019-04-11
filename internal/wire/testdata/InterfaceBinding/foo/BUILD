@@ -4,12 +4,12 @@ go_library(
     name = "go_default_library",
     srcs = ["foo.go"],
     importpath = "github.com/google/wire/internal/wire/testdata/InterfaceBinding/foo",
-    visibility = ["//visibility:private"],
+    visibility = ["//visibility:public"],
     deps = ["//:go_default_library"],
 )
 
 go_binary(
     name = "foo",
     embed = [":go_default_library"],
-    visibility = ["//:__subpackages__"],
+    visibility = ["//visibility:public"],
 )
