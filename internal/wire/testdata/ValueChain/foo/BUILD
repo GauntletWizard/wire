@@ -1,6 +1,7 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_path")
+load("//skylark:rule.bzl", "wire_library")
 
-go_library(
+wire_library(
     name = "go_default_library",
     srcs = ["foo.go"],
     importpath = "github.com/google/wire/internal/wire/testdata/ValueChain/foo",
@@ -13,3 +14,8 @@ go_binary(
     embed = [":go_default_library"],
     visibility = ["//:__subpackages__"],
 )
+
+go_path(
+    name = "go_path",
+    deps = [":go_default_library"],
+    )
