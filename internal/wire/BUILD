@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "analyze.go",
+        "copyast.go",
+        "errors.go",
+        "parse.go",
+        "wire.go",
+    ],
+    importpath = "github.com/maxbrunsfeld/counterfeiter/internal/wire",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "@org_golang_x_tools//go/ast/astutil:go_default_library",
+        "@org_golang_x_tools//go/packages:go_default_library",
+        "@org_golang_x_tools//go/types/typeutil:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["wire_test.go"],
+    embed = [":go_default_library"],
+    deps = ["@com_github_google_go_cmp//cmp:go_default_library"],
+)
