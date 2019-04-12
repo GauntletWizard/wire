@@ -73,6 +73,7 @@ def wire_library(name, importpath="", srcs=[], **kwargs):
   Do not include either "wire.go" or "wire_gen.go" in the srcs list."""
 
   generation_library = name + "_wirelib_"
+  # This library won't actually build because the build constraing prevents wire.go from compiling, but all it's used for is generating the path
   _go_library(
     name = generation_library,
     importpath = importpath,
