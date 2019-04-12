@@ -67,10 +67,14 @@ wire_runner = _go_rule(
 
 
 # When building a wire output, we form a vaugely diamond dependency tree. We need a version of the go_library that includes wire.go for building the wire_gen.go, and one containing wire_gen.go and not wire.go for building the library that is imported elsewhere
-def wire_library(name, importpath="", srcs=[], **kwargs):
+def wire_library(name, importpath="", srcs=[], deps = [], **kwargs):
   """A wire_library is equivalent to a rules_go go_library with "wire_gen.go" compiled in.
 
   Do not include either "wire.go" or "wire_gen.go" in the srcs list."""
+
+  # Both wire.go and wire_gen.go import the base library from this workspace, so ensure it's in our deps list.
+  wire_lib = Label("//:go_default_library")
+  deps = depset(direct=[str(wire_lib)] + deps)
 
   generation_library = name + "_wirelib_"
   # This library won't actually build because the build constraing prevents wire.go from compiling, but all it's used for is generating the path
@@ -78,8 +82,10 @@ def wire_library(name, importpath="", srcs=[], **kwargs):
     name = generation_library,
     importpath = importpath,
     srcs = srcs + ["wire.go"],
+    deps = deps,
     **kwargs
     )
+  # I'm about 90% sure this is unnecessary and we can instead use the precompiled form of nearly everything. But only 90%
   generation_path = name + "_wirepath_"
   _go_path(
       name = generation_path,
@@ -96,5 +102,6 @@ def wire_library(name, importpath="", srcs=[], **kwargs):
     name = name,
     importpath = importpath,
     srcs = srcs + [":" + wirerunner_name],
+    deps = deps,
     **kwargs
     )
